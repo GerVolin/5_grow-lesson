@@ -1,0 +1,8 @@
+:root {
+    --white-color: #fff;
+    --gray-color: #AEB4A6;
+    --green-color: #94DE1D;
+    --index: calc(1vw + 1vh); /*переменная для величины 
+    экрана где vw ширина окна браузера*/
+    --transition: ease-in-out;
+}

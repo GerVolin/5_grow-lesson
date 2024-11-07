@@ -1,0 +1,318 @@
+/* @import '../libs/btn/anim-menu-btn.css' */
+/*https://webdesign-master.ru/blog/html-css/grow-lesson.html*/
+
+@import '../css/vars.css';
+@import '../css/grid.css';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+    background-color: #02282F;
+    color: var(--white-color);
+    
+}
+
+/* Обнуление
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+*,*:before,*:after{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+
+nav,footer,header,aside{display: block;}
+
+html,body{
+    background-color: #032931; новое
+    color: white;
+
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    line-height: 1;
+    font-size: 14px;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+input,button,textarea{font-family:inherit;}
+
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner {padding:0;border:0;}
+a, a:visited{text-decoration: none;}
+a:hover{text-decoration: none;} 
+ul li{list-style: none;}
+img{vertical-align: top;}
+
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
+-------------------- */
+
+
+@font-face { /*подключение шрифтов*/
+    font-family: montserrat-g;
+    src: url(../fonts/Montserrat-Regular.woff2);
+}
+
+@font-face {
+    font-family: montserrat-g;
+    src: url(../fonts/Montserrat-Bold.woff2);
+    font-weight: 700; /*он предлагает отдельно 
+    указывать жирность, соотношение шрифта и его 
+    жирности на странице: 
+    https://webdesign-master.ru/blog/html-css/grow-lesson.html*/
+}
+
+@font-face {
+    font-family: montserrat-g;
+    src: url(../fonts/Montserrat-Black.woff2);
+    font-weight: 900;
+}
+
+@font-face { /*после подключения всех шрифтом советует 
+    обновить страницу, зайти в Сеть (F12) и посмотреть 
+    статусы 404*/
+    font-family: montserrat-g;
+    src: url(../fonts/Montserrat-SemiBold.woff2);
+    font-weight: 600;
+}
+
+body {
+    font-size: 16px;
+    font-family: montserrat-g, sans-serif;
+}
+
+.slider {
+    height: 105%;
+    
+}
+
+/*фон сайта*/
+.slider__layer {
+    
+    position: absolute;
+    inset: 0; 
+    /*inset: 0 аналог 
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    т.е. растянуть на всю ширину и на всю высоту*/
+    background-size: cover; /*занимает всё пространство*/
+    background-position: center;
+	will-change: transform; /*чтобы страница быстрее обрабатывалась*/
+}
+
+.slider__item {
+    overflow: hidden; /*скрыть со страницы всё лишнее, чтобы следующий слайд не наезжал на предыдущий*/
+    transform: scale(1.25)!important; /*!important для стилизации 
+    технических классов, лишний раз не использовать. 1 по умолчанию, т.е. 
+    увеличение до 1.25*/
+    transition: 2s ease !important; /*время наезда*/
+}
+
+.slider__item:not(.swiper-slide-active){
+    transform: scale(1) !important;
+}
+
+/*шапка и инфа на странице*/
+.slider-ui {
+    position: absolute;
+    z-index: 10;
+    inset: 0; /*чтобы занимал всё пространство*/
+}
+
+/*.swiper-slide {
+    background-color: #0442BB;
+    width: 100%;
+    height: 100px;
+}*/
+
+.top-line {
+    padding: 3.2em 0;
+}
+
+.logo {
+    display: block; /*делаем элемент из строчного блочным*/
+}
+
+.logo img {
+    display: block;
+    width: 15em;
+}
+
+.main-menu li {
+    list-style-type: none; /*чтобы пропали кружечки списка*/
+    display: inline-block; /*чтобы выстроились в строку*/
+}
+
+.main-menu li > * { /* > * все дочернии li, зеленые полоски справа и слева */
+    color: var(--gray-color);
+    font-weight: 700; /*жирность шрифта*/
+    text-decoration: none; /*чтобы не было подчеркивания*/
+    letter-spacing: .25em; /*расстояние между буквами*/
+    text-transform: uppercase; /*верхний регистр*/
+    font-size: .75em;
+}
+
+.main-menu li > *::before,
+.main-menu li > *::after {
+    content: '';
+    display: inline-block;
+    height: 2px;
+    background-color: var(--green-color);
+    width: 11px;
+    vertical-align: middle;
+    top: -2px;
+    left: -2px;
+    position: relative;
+    border-radius: 10em;
+    margin: 0 7px;
+    visibility: hidden; /*чтобы пропали*/
+}
+
+.main-menu li.active > *,
+.main-menu li:hover > * {
+    color: var(--white-color);
+}
+
+.main-menu li.active > *::before,
+.main-menu li:hover > *::before,
+.main-menu li.active > *::after,
+.main-menu li:hover > *::after {
+    visibility: visible;
+}
+
+.button {
+    padding: 1em 2.5em;
+    color: var(--white-color);
+    background-color: var(--green-color);  /* ctrl + / */
+    border: 1.5px solid transparent;
+    border-radius: 2em 0 2em 2em;
+    font-weight: 600; /*жирность шрифта*/
+    text-decoration: none; /*чтобы не было подчеркивания*/
+    letter-spacing: .2em; /*расстояние между буквами*/
+    text-transform: uppercase; /*верхний регистр*/
+    font-size: .6em;
+    cursor: pointer; /* чтобы нажимался*/
+}
+
+.button--top {
+    background-color: transparent; /*прозрачный фон*/
+    border-color: var(--green-color);
+    margin: 0 2em 0 3em;
+}
+
+.button:hover {
+    background-color: var(--green-color);
+    transition: .3s;
+}
+
+.submenu {
+    --anim-menu-btn-color: var(--gray-color);
+    --anim-menu-btn-width: 1.2em; /*ширина бургера*/
+}
+
+.header-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header-content {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    flex-direction: column; 
+}
+
+.header-content__slide {
+    position: absolute;
+}
+
+.header-content h1 {
+    font-size: calc(var(--index) * 12);
+    text-transform: uppercase;
+    font-weight: 1000;
+}
+
+.header-content p {
+    max-width: 560px;
+    font-weight: 600;
+    line-height: 1.4;
+    display: inline-block; /*чтобы был инлайновым элементом 
+    и центрировался, но и так вроде работает*/
+}
+
+.button--main {
+    margin-top: 3em;
+    width: 200px;
+    height: 40px;
+    vertical-align: center; 
+    line-height: 20px; 
+    display: inline-block; /*чтобы был инлайновым элементом 
+    и центрировался */
+}
+
+.header-bottom { /*но его не видно*/
+    min-height: 120px;
+}
+
+.letters .letter {
+    text-shadow: 25px 0 35px #0000006c;
+    position: relative;
+    margin-left: -.2em;
+    right: -.2em; /*сдвинул вправа*/
+    opacity: 0;
+    top: -5em;
+    transition: opacity var(--transition), top var(--transition);
+}
+
+.header-content__slide.active .letter {
+    opacity: 1;
+    top: 0;
+}
+.header-content__slide.active + * .letter {
+    top: 5em;
+}
+
+.header-content__info {
+    top: -20em;
+    left: 1em;
+    position: relative;
+    opacity: 0; /*прозрачность*/
+    transition: opacity 1s ease, top 1.2s ease; /*2 с-ва: 
+    прозрачность линейно 1с, и наезд сверху 1.2с линейно*/
+}
+
+.header-content__slide.active .header-content__info {
+    opacity: 1;
+    top: 0;
+}
+
+.header-content__slide:has(* + .active .header-content__info), 
+.header-content__slide.active + * .header-content__info { /*чтобы 
+    не появлялось текста с кнопкой других слайдов*/
+    top: 18em;
+}
+
+.slider-ui { /*чтобы работал тач скрин*/
+    pointer-events: none;
+}
+.logo, .main-menu, .button, .submenu { /*чтобы на тач скрине 
+    работали все кнопки и ссылки*/
+    pointer-events: auto;
+}

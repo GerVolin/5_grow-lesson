@@ -1,0 +1,37 @@
+:root {
+    --grid-width: 1140px;
+    --grid-gutter: .5em; /*отступы между колонками*/
+}
+
+.container {
+    max-width: calc(var(--grid-width) + var(--grid-gutter) * 2); /*это*/
+    margin: auto;
+    padding: 0 var(--grid-gutter); /*это*/
+    min-width: calc(320px + var(--grid-gutter) * 2);
+}
+
+.row {
+    display: flex;
+    margin: calc(var(--grid-gutter) * -1); /*и это  нужно 
+    чтобы контейнер, а точнее top-line был реально 1140px*/
+}
+
+.col {
+    width: fit-content;
+    padding: 0 var(--grid-gutter);
+}
+
+.col--lead {
+    flex: 1;
+}
+
+.col--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.col--right {
+    display: flex;
+    justify-content: right;
+}
